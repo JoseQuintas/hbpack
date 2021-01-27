@@ -1,0 +1,6 @@
+mt=yes
+gui=yes
+strip=yes
+fullstatic=yes
+{!hblib}compr=yes
+PRGFLAGS=-m -n -w3 -es2 -ge1

@@ -1,0 +1,127 @@
+#
+# use:    JoseQuintas/hbpack/mingw_0703
+# create: JoseQuintas/hbpack/mingw_0703
+#
+
+name: Harbour 3.4 full
+
+on:
+  schedule:
+    - cron: '15 0 25 * *'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Harbour 3.4 full'
+        default: 'harbour_34_full'
+        required: true
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Load Harbour 3.4
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hb34_0703.yml
+         workflow_conclusion: success
+         name: hb34_0703
+         path: c:\temp
+         repo: JoseQuintas/harbour_34
+
+    - name: Load deleted_hb
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: deleted_hb.yml
+         workflow_conclusion: success
+         name: deleted_hb
+         path: c:\temp
+         repo: JoseQuintas/deleted_hb
+
+    - name: Load hbsefazclass
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hbsefazclass.yml
+         workflow_conclusion: success
+         name: hbsefazclass
+         path: c:\temp
+         repo: JoseQuintas/hbsefazclass
+
+    - name: Load HMG
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hmg_hb34_0703.yml
+         workflow_conclusion: success
+         name: hmg_hb34_0703
+         path: c:\temp
+         repo: JoseQuintas/hmg
+
+    - name: Load HMGE
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hmge_hb34_0703.yml
+         workflow_conclusion: success
+         name: hmge_hb34_0703
+         path: c:\temp
+         repo: JoseQuintas/hmge
+
+    - name: Load HWGUI
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: hwgui_hb34_0703.yml
+         workflow_conclusion: success
+         name: hwgui_hb34_0703
+         path: c:\temp
+         repo: JoseQuintas/hwgui
+
+    - name: Load OOHG
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: oohg_hb34_0703.yml
+         workflow_conclusion: success
+         name: oohg_hb34_0703
+         path: c:\temp
+         repo: JoseQuintas/oohg
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hb34_0703
+         path: c:\temp\hb34_0703.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: deleted_hb
+         path: c:\temp\deleted_hb.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hbsefazclass
+         path: c:\temp\hbsefazclass.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hmg_hb34_0703
+         path: c:\temp\hmg_hb34_0703.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hmge_hb34_0703
+         path: c:\temp\hmge_hb34_0703.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: hwgui_hb34_0703
+         path: c:\temp\hwgui_hb34_0703.7z
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: oohg_hb34_0703
+         path: c:\temp\oohg_hb34_0703.7z

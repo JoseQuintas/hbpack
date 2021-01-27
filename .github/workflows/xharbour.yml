@@ -1,0 +1,32 @@
+name: xharbour
+
+on:
+  schedule:
+    - cron: '0 0 25 * *'
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'xharbour'
+        default: 'xharbour'
+        required: true
+
+jobs:
+
+  Build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Load
+      uses: JoseQuintas/action-download-artifact@v2
+      with:
+         workflow: xharbour.yml
+         workflow_conclusion: success
+         name: xharbour
+         path: c:\temp
+         repo: JoseQuintas/hbpack
+
+    - name: Save
+      uses: actions/upload-artifact@v2
+      with:
+         name: xharbour
+         path: c:\temp\xharbour.7z
